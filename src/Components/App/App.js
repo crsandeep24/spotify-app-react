@@ -9,29 +9,67 @@ export class App extends Component {
     super(props);
     this.state = {
       searchResults: [
-        { name: "Tum hi ho", artist: "Arman", album: "Aashiqui 2" },
+        { name: "Tum hi ho", artist: "Arman", album: "Aashiqui 2", id: 1 },
+        {
+          name: "Kariye Kuch kariye",
+          artist: "AR Rehman",
+          album: "Chack de India",
+          id: 2,
+        },
+        {
+          name: "Dangal Dangal",
+          artist: "Shreya Ghoshal",
+          album: "Dangal",
+          id: 3,
+        },
       ],
       playlistName: "Sandeep",
       playlistTracks: [
         {
-          name: "Chalore chalore",
+          name: "Playlist 1",
           artist: "Anirudh Ravichander",
           album: "Jalsa",
+          id: 1,
+        },
+        {
+          name: "Playlist 2",
+          artist: "DSP",
+          album: "Lakshmi",
+          id: 1,
+        },
+        {
+          name: "Playlist 3",
+          artist: "Anoop Rubents",
+          album: "Mukunda",
           id: 1,
         },
       ],
     };
     this.addTrack = this.addTrack.bind(this);
+    this.removeTrack = this.removeTrack.bind(this)
   }
 
   addTrack(track) {
-    if (!track.id === this.state.playlistTracks.id) {
-      let newTrack = this.state.playlistTracks.concat(track);
-      this.setState({ playlistTracks: newTrack });
+    let tracks = this.state.playlistTracks
+    if (tracks.find(savedTrack => savedTrack.id === track.id)) {
+      return
+    } else {
+      tracks.push(track)
+      this.setState({playlistTracks: tracks})
     }
   }
 
+  removeTrack(track) {
+    let tracks = this.state.playlistTracks
+    let trackId = track.id
+    const result = tracks.filter(removetrack => removetrack.id === trackId)
+    tracks.pop(result)
+    this.setState({playlistTracks: tracks})
+  }
+
+
   render() {
+    // this.removeTrack();
     return (
       <div>
         <h1>
@@ -47,6 +85,7 @@ export class App extends Component {
             <Playlist
               playlistName={this.state.playlistName}
               playlistTracks={this.state.playlistTracks}
+              onRemove={this.removeTrack}
             />
           </div>
         </div>

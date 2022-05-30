@@ -5,18 +5,20 @@ import "./TrackList.css";
 export class TrackList extends Component {
   render(props) {
     let incomingTrack = this.props.tracks;
-    const result = incomingTrack.map((track, i) => {
-      return (
-        <h2 key={i}>
-          Track: {track.name}, Artist Name: {track.artist}, Alubm: {track.album}
-        </h2>
-      );
-    });
 
     return (
       <div className="TrackList">
-        {result}
-        <Track onAdd={this.props.onAdd} isRemoval={true}/>
+        {incomingTrack.map((track) => {
+          return (
+            <Track
+              track={track}
+              key={track.id}
+              isRemoval={this.props.isRemoval}
+              onAdd={this.props.onAdd}
+              onRemove={this.props.onRemove}
+            />
+          );
+        })}
       </div>
     );
   }

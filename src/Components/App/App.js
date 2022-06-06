@@ -76,7 +76,7 @@ export class App extends Component {
   }
 
   savePlaylist() {
-    let trackURIs = this.state.playlistTracks.map((uri) => uri.uri);
+    let trackURIs = this.state.playlistTracks.map((track) => track.uri);
     return trackURIs;
   }
 
@@ -85,7 +85,6 @@ export class App extends Component {
   }
 
   render() {
-    console.log(this.savePlaylist());
     return (
       <div>
         <h1>

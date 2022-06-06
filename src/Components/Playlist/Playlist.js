@@ -9,8 +9,7 @@ export class Playlist extends Component {
   }
 
   handleNameChange(e) {
-    let inputValue = e.target.value;
-    this.props.onNameChange(inputValue);
+    this.props.onNameChange(e.target.value);
   }
 
   render() {
